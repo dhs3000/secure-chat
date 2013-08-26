@@ -1,0 +1,21 @@
+
+h3 {
+    border-bottom: 1px solid @gray-lighter;
+}
+
+.message:not(:last-child) {
+    border-bottom: 1px solid @gray-lighter;
+}
+
+.message-name {
+    font-weight: bold;
+}
+.message-name:after {
+    content: ": ";
+}
+
+.message-time {
+    float:right;
+    font-style: italic;
+    font-size: 80%;
+}

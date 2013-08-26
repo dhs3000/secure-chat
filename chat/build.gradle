@@ -1,0 +1,40 @@
+apply plugin: 'java'
+apply plugin: 'war'
+
+
+sourceCompatibility = 1.7
+version = '1.0'
+
+repositories {
+        mavenCentral()
+}
+
+dependencies {
+
+    compile files('./WebContent/WEB-INF/lib/commons-codec-1.8.jar')
+    compile files('./WebContent/WEB-INF/lib/commons-logging-1.1.3.jar')
+
+    compile files('./WebContent/WEB-INF/lib/guava-14.0.1.jar')
+
+    compile files('./WebContent/WEB-INF/lib/java-json.jar')
+    compile files('./WebContent/WEB-INF/lib/js.jar')
+    compile files('./WebContent/WEB-INF/lib/log4j-1.2.17.jar')
+
+    compile files('./lib/javax.servlet-api-3.0.1.jar')
+    compile files('./lib/tomcat-catalina-7.0.37.jar')
+    compile files('./lib/tomcat-coyote-7.0.37.jar')
+
+    compile files('./lib/jetty-websockets/websocket-api-9.0.5.v20130815.jar')
+    compile files('./lib/jetty-websockets/websocket-common-9.0.5.v20130815.jar')
+    compile files('./lib/jetty-websockets/websocket-core-9.0.0.M2.jar')
+    compile files('./lib/jetty-websockets/websocket-server-9.0.5.v20130815.jar')
+    compile files('./lib/jetty-websockets/websocket-servlet-9.0.5.v20130815.jar')
+
+
+    testCompile files('./lib/hamcrest-all-1.3.jar')
+    testCompile files('./lib/junit-4.8.2.jar')
+}
+
+war {
+    from './WebContent' // adds a file-set to the root of the archive
+}

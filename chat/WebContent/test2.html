@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>WebSockets TEST-Page</title>
+
+<script src="js/D.js"></script>
+<script src="js/ClassBase.js"></script>
+<script src="js/Timestamp.js"></script>
+<script type="text/javascript">
+
+
+
+ClassBase.prototype.hello = function() {
+    return "Hello from ClassBase";
+};
+
+
+
+
+ClassBase.extend("de.dhs.Sub", {
+    init: function (name) {
+        console.debug("Sub constructor");
+        de.dhs.Sub.$super(this);
+        this.name = name;
+    },
+    hello2: function() {
+        return "Hello from Sub";
+    }
+});
+
+
+de.dhs.Sub.extend("de.dhs.SubSub", {
+    init: function (name, ext) {
+        console.debug("SubSub constructor");
+        de.dhs.SubSub.$super(this, name);
+        this.ext = ext;
+    }
+});
+
+var sub = new de.dhs.Sub("ICH");
+
+console.log("sub.name     = " + sub.name);
+console.log("sub.hello()  = " + sub.hello());
+console.log("sub.hello2() = " + sub.hello2());
+
+sub = ClassBase.fromJSONString(sub.toJSONString());
+console.log("sub.name     = " + sub.name);
+console.log("sub.hello()  = " + sub.hello());
+console.log("sub.hello2() = " + sub.hello2());
+
+
+sub = new de.dhs.SubSub("ICH", "HAHA");
+
+console.log("sub.name     = " + sub.name);
+console.log("sub.ext      = " + sub.ext);
+console.log("sub.hello()  = " + sub.hello());
+console.log("sub.hello2() = " + sub.hello2());
+
+
+ClassBase.extend("TimeUser", {
+    init: function (timestamp) {
+        TimeUser.$super(this);
+        this.timestamp = timestamp;
+    }
+});
+
+
+var time = new Timestamp();
+var us = new TimeUser(time);
+console.log("us.timestamp instanceof Timestamp = " + (us.timestamp instanceof Timestamp));
+console.log("us.timestamp = " + us.timestamp.toViewString());
+
+var json = us.toJSONString();
+console.log("json = " + json);
+
+us = ClassBase.fromJSONString(json);
+
+console.log("us.timestamp instanceof Timestamp = " + (us.timestamp instanceof Timestamp));
+console.log("us.timestamp = " + us.timestamp.toViewString());
+
+
+(function(){
+
+    console.log("");
+    console.log("");
+    console.log("");
+
+    var LocalClass1 = ClassBase.extendLocal({
+        init: function (timestamp) {
+            TimeUser.$super(this);
+            this.timestamp = timestamp;
+        }
+    });
+
+
+    var time = new Timestamp();
+    var us = new LocalClass1(time);
+    console.log("us.timestamp instanceof Timestamp = " + (us.timestamp instanceof Timestamp));
+    console.log("us.timestamp = " + us.timestamp.toViewString());
+
+    var json = us.toJSONString();
+    console.log("json = " + json);
+
+    us = ClassBase.fromJSONString(json);
+
+    console.log("us.timestamp instanceof Timestamp = " + (us.timestamp instanceof Timestamp));
+    console.log("us.timestamp = " + us.timestamp.toViewString());
+
+    console.log("");
+    console.log("");
+    console.log("");
+
+    var LocalClass2 = ClassBase.extendLocal({
+        init: function (timestamp) {
+            TimeUser.$super(this);
+            this.timestamp = timestamp;
+        }
+    });
+
+
+    var time = new Timestamp();
+    var us = new LocalClass2(time);
+    console.log("us.timestamp instanceof Timestamp = " + (us.timestamp instanceof Timestamp));
+    console.log("us.timestamp = " + us.timestamp.toViewString());
+
+    var json = us.toJSONString();
+    console.log("json = " + json);
+
+    us = ClassBase.fromJSONString(json);
+
+    console.log("us.timestamp instanceof Timestamp = " + (us.timestamp instanceof Timestamp));
+    console.log("us.timestamp = " + us.timestamp.toViewString());
+
+}());
+
+</script>
+
+</head>
+<body>
+
+
+
+</body>
+</html>

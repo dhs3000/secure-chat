@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSockets Client</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="css/styles-min.css" rel="stylesheet"/>
+</head>
+<body>
+
+    <div id="content" class="container">
+        <div id="wait">Establishing connection...</div>
+	</div>
+
+<script id="chat.html" type="text/dhs-template">
+<div id="chat">
+    <h2 class="chat-heading">Chat</h2>
+    <b>Angemeldet als: {{name}}</b>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>
+                Nachrichten
+            </h3>
+            <div id="messages">
+            </div>
+        </div>
+        <div class="col-md-8">
+                <h3>
+                    Buddies
+                </h3>
+                <ul id="users">
+                </ul>
+        </div>
+    </div>
+    <div class="row">
+            <form class="form-chat">
+                <div class="control-group">
+                    <label class="control-label" for="textarea">Meine Nachricht</label>
+                    <div class="controls">
+                        <textarea class="input-xlarge" id="new-message" rows="10"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-primary" type="submit">Send</button>
+                    <button class="btn btn-default" type="reset">Reset</button>
+                </div>
+            </form>
+    </div>
+</script>
+
+<script id="chat-message.partial" type="text/dhs-template">
+    <div class="message" style="clear:both;">
+        <span class="message-name">{{name}}</span>
+        <span class="message-text">{{message}}</span>
+        <span class="message-time">{{timestamp}}</span>
+    </div>
+</script>
+
+<script id="chat-join.partial" type="text/dhs-template">
+    <li class="username"><i class="icon-star"> </i> {{name}}</li>
+</script>
+
+<script id="chat-hello.partial" type="text/dhs-template">
+    <li class="username"><i class="icon-star"> </i> {{name}}</li>
+</script>
+<script id="login.html" type="text/dhs-template">
+        <form class="form-signin">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <input name="name" type="text" class="form-control" placeholder="Name" autofocus="autofocus" required="required" />
+            <input name="pwd" type="password" class="form-control" placeholder="Password" required="required" autocomplete="off" />
+            <button class="btn btn-primary" type="submit">Sign in</button>
+            <button class="btn btn-default" type="reset">Reset</button>
+        </form>
+</script>
+
+
+<script src="js/lib/jquery-2.0.3.min.js"></script>
+
+<script src="js/lib/jsencrypt.js"></script>
+<script src="js/lib/aes.js"></script>
+
+<script src="js/D.js"></script>
+<script src="js/D.HTML.js"></script>
+<script src="js/PassphraseGenerator.js"></script>
+<script src="js/ServerConnection.js"></script>
+<script src="js/Views.js"></script>
+<script src="js/ClassBase.js"></script>
+<script src="js/Timestamp.js"></script>
+<script src="js/ChatMessages.js"></script>
+<script src="js/Dialog.js"></script>
+<script src="js/Startup.js"></script>
+
+</body>
+</html>

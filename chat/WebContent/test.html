@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>WebSockets TEST-Page</title>
+
+<script src="js/D.js"></script>
+<script src="js/PassphraseGenerator.js"></script>
+
+<script src="js/ClassBase.js"></script>
+<script type="text/javascript">
+
+
+D.extend("NewClass", D.scoped(function() {
+    var helper = function(text) {
+        console.debug("HELLO " + text +" from Helper!");
+    };
+
+    return {
+        init: function(name) {
+            NewClass.$super(this);
+            helper(name);
+            this.name = name;
+        },
+        talk: function(text) {
+            console.debug(this.name + ": " + text);
+        }
+    };
+}));
+
+D.extend(NewClass, "Sub1", {
+    init: function(name) {
+        Sub1.$super(this, name);
+    }
+});
+
+
+NewClass.extend("Sub2", {
+    init: function(name) {
+        Sub2.$super(this, name);
+    }
+});
+
+var nc = new NewClass("HEINZ");
+var sub1 = new Sub1("WALTER");
+var sub2 = new Sub2("OLAF");
+
+console.log();
+console.log("nc.name                = " + nc.name);
+console.log("nc instanceof NewClass = " + (nc instanceof NewClass));
+console.log("nc instanceof Sub1 = " + (nc instanceof Sub1));
+
+
+console.log();
+console.log("sub1.name                = " + sub1.name);
+console.log("sub1 instanceof NewClass = " + (sub1 instanceof NewClass));
+console.log("sub1 instanceof Sub1     = " + (sub1 instanceof Sub1));
+
+
+sub1.talk("Bla bla bla");
+
+
+console.log();
+console.log("sub2.name                = " + sub2.name);
+console.log("sub2 instanceof NewClass = " + (sub2 instanceof NewClass));
+console.log("sub2 instanceof Sub1     = " + (sub2 instanceof Sub1));
+
+
+sub2.talk("Bla bla bla");
+
+
+ClassBase.extend("Named", {
+    init: function(name) {
+	    Named.$super(this);
+	    console.debug("Named: " + name);
+	    this.name = name;
+    },
+    sayName: function() {
+        console.log("My name is " + this.name + ", ojeah!");
+    }
+});
+
+
+
+Named.extend("Person", {
+    init: function(name, age, car) {
+	    Person.$super(this, name);
+	    console.debug("Person: " + name + "(" + age + ")");
+	    this.age = age;
+	    this.car = car;
+    }
+});
+
+
+Named.extend("Car", {
+    init: function(name, ps) {
+	    Car.$super(this, name);
+	    console.debug("Car: " + name + "(" + ps + ")");
+	    this.ps = ps;
+    }
+});
+
+var car = new Car("VW", 550);
+var p = new Person("dennis", 29, car);
+
+
+p.sayName();
+
+console.log("p.name     = " + p.name);
+console.log("p.car.name = " + p.car.name);
+
+var j = p.toJSONString();
+//console.log("car.json   =" + car.toJSONString());
+console.log("p.json      = " + j);
+
+var x = JSON.parse(j);
+console.log("parsed x    = " + x);
+
+var y = ClassBase.fromJSONString(j);
+console.log("parsed y         = " + y);
+console.log("parsed y has car = " + y.car);
+
+</script>
+
+</head>
+<body>
+
+
+
+</body>
+</html>
