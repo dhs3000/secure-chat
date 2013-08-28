@@ -30,7 +30,7 @@ function Dialog() {
         onMessageHandler = function(msg){
             viewOnMessageHandler(msg);
         },
-        server = new ServerConnection("localhost:7070/chat/websocket", onConnectionEstablishedHandler, onMessageHandler);
+        server = new ServerConnection(document.location.host + window.location.pathname + "websocket", onConnectionEstablishedHandler, onMessageHandler);
 
     views.registerPage('login.html', function() {
         viewOnMessageHandler = function(msg) {
