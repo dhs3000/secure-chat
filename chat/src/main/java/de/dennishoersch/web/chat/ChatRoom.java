@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import de.dennishoersch.web.websocket.chat.db.UserRepository;
+import de.dennishoersch.web.chat.db.UserRepository;
 
 /**
  * @author hoersch

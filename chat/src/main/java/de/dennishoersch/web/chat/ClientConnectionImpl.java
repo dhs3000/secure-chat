@@ -24,8 +24,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.dennishoersch.lang.Throwables;
-import de.dennishoersch.web.websocket.chat.db.User;
-import de.dennishoersch.web.websocket.chat.db.UserRepository;
+import de.dennishoersch.web.chat.db.User;
+import de.dennishoersch.web.chat.db.UserRepository;
 
 /**
  * @author hoersch
