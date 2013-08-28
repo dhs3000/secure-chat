@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/java-json.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/js.jar" sourcepath="WebContent/WEB-INF/lib/sources/js-sources.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/guava-14.0.1.jar" sourcepath="WebContent/WEB-INF/lib/sources/guava-14.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/hamcrest-all-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/javax.servlet-api-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.8.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-codec-1.8.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-coyote-7.0.37.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-catalina-7.0.37.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-websockets/websocket-api-9.0.5.v20130815.jar" sourcepath="lib/jetty-websockets/sources/websocket-api-9.0.5.v20130815-sources.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-websockets/websocket-common-9.0.5.v20130815.jar" sourcepath="lib/jetty-websockets/sources/websocket-common-9.0.5.v20130815-sources.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-websockets/websocket-core-9.0.0.M2.jar" sourcepath="lib/jetty-websockets/sources/websocket-core-9.0.0.M2-sources.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-websockets/websocket-server-9.0.5.v20130815.jar" sourcepath="lib/jetty-websockets/sources/websocket-server-9.0.5.v20130815-sources.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-websockets/websocket-servlet-9.0.5.v20130815.jar" sourcepath="lib/jetty-websockets/sources/websocket-servlet-9.0.5.v20130815-sources.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
