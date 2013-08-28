@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.dennishoersch.web.websocket.chat.db;
+package de.dennishoersch.web.chat.db;
 
 import java.util.Arrays;
 import java.util.Collection;
