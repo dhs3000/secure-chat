@@ -6,16 +6,36 @@
 
 	<display-name>chat</display-name>
 
+	<!-- Configure ContextLoaderListener to use JavaConfigWebApplicationContext instead of the default XmlWebApplicationContext -->
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </context-param>
+    <!-- Configuration locations must consist of one or more comma- or space-delimited
+         fully-qualified @Configuration classes -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>de.dennishoersch.web.chat.spring.SpringConfiguration</param-value>
+    </context-param>
+    
+	<context-param>
+	     <param-name>contextInitializerClasses</param-name>
+	     <param-value>de.dennishoersch.web.chat.spring.profiles.SetProfileContextListener</param-value>
+	</context-param>    
+    
+    <!-- Bootstrap the root application context as usual using ContextLoaderListener -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
 	<servlet>
 	   <servlet-name>ChatWebSocketServlet</servlet-name>
-       <servlet-class>de.dennishoersch.web.chat.jetty.JettyWebSocketServlet</servlet-class>
-       <!--
-        <servlet-class>de.dennishoersch.web.chat.tomcat.TomcatWebSocketServlet</servlet-class>
-        -->
+	   <servlet-class>de.dennishoersch.web.chat.spring.DelegatingWebSocketServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
