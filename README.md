@@ -11,6 +11,7 @@ Secure chat. Uses public/private key encryption for communication between client
 
 
 ###Playground for *client-side stuff*
+- WebSockets
 - Prototype / inheritance (D.js, ClassBase.js)
 - Serializing objects (of special classes) to and deserializing from JSON
 - View templates
