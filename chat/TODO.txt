@@ -1,0 +1,3 @@
+
+- on close etc handler im client: view ausblenden
+- mehr fehlerbehandlung?
