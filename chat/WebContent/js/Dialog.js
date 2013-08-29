@@ -38,7 +38,6 @@ function Dialog() {
             if (msg === "success") {
                 user["name"] = jQuery("input[name='name']").val();
                 views.show('chat.html', user);
-                server.sendMessage(ChatMessages.createJoinMessage(user["name"]));
             } else {
                 // set error message and stuff
                 console.error("Unexpected message: " + msg);
@@ -110,6 +109,8 @@ function Dialog() {
                 form.submit();
             }
         });
+
+        server.sendMessage(ChatMessages.createJoinMessage(user["name"]));
 
         setTimeout(function() {
             jQuery("#new-message").focus();
