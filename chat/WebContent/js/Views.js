@@ -67,9 +67,9 @@ function Views(viewId_) {
             jQuery(viewId).fadeOut(function() {
                 jQuery(viewId)
                     .html(html)
-                    .fadeIn();
-
-                page['onReadyHandler']();
+                    .fadeIn(function() {
+                        page['onReadyHandler']();
+                    });
             });
 
         },
