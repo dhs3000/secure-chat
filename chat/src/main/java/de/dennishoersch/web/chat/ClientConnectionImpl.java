@@ -74,7 +74,7 @@ public class ClientConnectionImpl implements ClientConnection {
 
     @Override
     public void sendMessage(String message) throws IOException {
-        _webSocket.sendMessage(message);
+        _webSocket.sendMessage(createEncrypedMessage(message));
     }
 
     @Override
@@ -257,5 +257,10 @@ public class ClientConnectionImpl implements ClientConnection {
 
     private final String decryptAES(String key, String input) {
         return _encryption.decryptAES(key, input);
+    }
+
+    @Override
+    public WebSocket getWebSocket() {
+        return _webSocket;
     }
 }

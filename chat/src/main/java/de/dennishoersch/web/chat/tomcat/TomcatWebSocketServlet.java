@@ -16,39 +16,33 @@
 
 package de.dennishoersch.web.chat.tomcat;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.catalina.websocket.StreamInbound;
 import org.apache.catalina.websocket.WebSocketServlet;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 
-import de.dennishoersch.web.chat.ChatRoom;
 import de.dennishoersch.web.chat.ClientConnection;
-import de.dennishoersch.web.chat.Encryption;
-import de.dennishoersch.web.util.ServletContextResourceResolver;
 
 /**
  * @author hoersch
  * 
  */
-public class TomcatWebSocketServlet extends WebSocketServlet {
+public class TomcatWebSocketServlet extends WebSocketServlet implements BeanFactoryAware {
     private static final long serialVersionUID = 1L;
 
-    private ChatRoom _chatRoom;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        ServletContextResourceResolver resourceResolver = new ServletContextResourceResolver(config.getServletContext());
-        _chatRoom = new ChatRoom(new Encryption(resourceResolver));
-    }
+    private BeanFactory beanFactory;
 
     @Override
     protected StreamInbound createWebSocketInbound(String string, HttpServletRequest request) {
-        TomcatWebSocket result = new TomcatWebSocket();
-        ClientConnection clientConnection = _chatRoom.newClientConnection(result);
-        result.setClientConnection(clientConnection);
-        return result;
+        ClientConnection connection = beanFactory.getBean(ClientConnection.class);
+        return (StreamInbound) connection.getWebSocket();
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
     }
 }

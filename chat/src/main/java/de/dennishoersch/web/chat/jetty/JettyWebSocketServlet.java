@@ -13,18 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package de.dennishoersch.web.chat.jetty;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-
+import org.eclipse.jetty.websocket.servlet.WebSocketCreator;
 import org.eclipse.jetty.websocket.servlet.WebSocketServlet;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
-
-import de.dennishoersch.web.chat.ChatRoom;
-import de.dennishoersch.web.chat.Encryption;
-import de.dennishoersch.web.util.ServletContextResourceResolver;
 
 /**
  * @author hoersch
@@ -33,18 +26,14 @@ import de.dennishoersch.web.util.ServletContextResourceResolver;
 public class JettyWebSocketServlet extends WebSocketServlet {
     private static final long serialVersionUID = 1L;
 
-    private ChatRoom _chatRoom;
+    private final WebSocketCreator webSocketCreator;
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        ServletContextResourceResolver resourceResolver = new ServletContextResourceResolver(config.getServletContext());
-        _chatRoom = new ChatRoom(new Encryption(resourceResolver));
-        super.init(config);
+    public JettyWebSocketServlet(WebSocketCreator webSocketCreator) {
+        this.webSocketCreator = webSocketCreator;
     }
 
     @Override
     public void configure(WebSocketServletFactory factory) {
-        ClientConnectionCreator creator = new ClientConnectionCreator(_chatRoom);
-        factory.setCreator(creator);
+        factory.setCreator(webSocketCreator);
     }
 }

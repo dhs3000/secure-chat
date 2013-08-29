@@ -20,30 +20,33 @@ import org.apache.log4j.Logger;
 import org.eclipse.jetty.websocket.api.UpgradeRequest;
 import org.eclipse.jetty.websocket.api.UpgradeResponse;
 import org.eclipse.jetty.websocket.servlet.WebSocketCreator;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 
-import de.dennishoersch.web.chat.ChatRoom;
 import de.dennishoersch.web.chat.ClientConnection;
 
 /**
  * @author hoersch
  * 
  */
-class ClientConnectionCreator implements WebSocketCreator {
-    protected static final Logger logger = Logger.getLogger(ClientConnectionCreator.class);
+public class ClientConnectionCreator implements WebSocketCreator, BeanFactoryAware {
+    private final Logger logger = Logger.getLogger(getClass());
 
-    private final ChatRoom _chatRoom;
+    private BeanFactory beanFactory;
 
-    ClientConnectionCreator(ChatRoom chatRoom) {
-        _chatRoom = chatRoom;
+    public ClientConnectionCreator() {
     }
 
     @Override
     public Object createWebSocket(UpgradeRequest req, UpgradeResponse resp) {
-        logger.debug("ChatRoom: " + _chatRoom);
-        JettyWebSocket result = new JettyWebSocket();
-        ClientConnection clientConnection = _chatRoom.newClientConnection(result);
-        result.setClientConnection(clientConnection);
-        return result;
+        ClientConnection connection = beanFactory.getBean(ClientConnection.class);
+        logger.debug("ClientConnection: " + connection);
+        return connection.getWebSocket();
     }
 
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
+    }
 }

@@ -64,6 +64,7 @@ class TomcatWebSocket extends MessageInbound implements WebSocket {
         _clientConnection.onClose();
     }
 
+    @Override
     public void setClientConnection(ClientConnection clientConnection) {
         _clientConnection = clientConnection;
     }

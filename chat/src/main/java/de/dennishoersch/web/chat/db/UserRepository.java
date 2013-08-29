@@ -13,27 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package de.dennishoersch.web.chat.db;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Map;
-
-import com.google.common.collect.Maps;
 
 /**
  * @author hoersch
- * 
+ *
  */
-public class UserRepository {
+public interface UserRepository {
 
-    private final Map<String, User> _users = Maps.uniqueIndex(users(), User.toName());
+    public abstract User findUserByName(String name);
 
-    private static Collection<User> users() {
-        return Arrays.asList(new User("dennis", "pwd"), new User("megs", "pwd!"));
-    }
-
-    public User findUserByName(String name) {
-        return _users.get(name);
-    }
 }

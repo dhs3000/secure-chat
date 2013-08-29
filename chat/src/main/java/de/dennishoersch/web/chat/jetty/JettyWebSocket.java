@@ -64,6 +64,7 @@ public class JettyWebSocket implements de.dennishoersch.web.chat.WebSocket {
         _clientConnection.onClose();
     }
 
+    @Override
     public void setClientConnection(ClientConnection clientConnection) {
         _clientConnection = clientConnection;
     }

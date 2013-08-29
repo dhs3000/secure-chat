@@ -13,17 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package de.dennishoersch.web.chat.tomcat;
 
-package de.dennishoersch.web.chat;
+import javax.servlet.Servlet;
 
-import java.io.IOException;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
-/**
- * @author hoersch
- * 
- */
-public interface WebSocket {
-    public void setClientConnection(ClientConnection clientConnection);
+import de.dennishoersch.web.chat.spring.profiles.Profiles;
 
-    public void sendMessage(String message) throws IOException;
+@Configuration
+@Profiles.Tomcat
+public class TomcatConfiguration {
+
+    @Bean
+    public Servlet webSocketServlet() {
+        return new TomcatWebSocketServlet();
+    }
+
+    @Bean
+    @Scope("prototype")
+    public TomcatWebSocket webSocket() {
+        return new TomcatWebSocket();
+    }
+
 }

@@ -37,4 +37,6 @@ public interface ClientConnection {
     void onTextMessage(String message);
 
     void onClose();
+
+    WebSocket getWebSocket();
 }

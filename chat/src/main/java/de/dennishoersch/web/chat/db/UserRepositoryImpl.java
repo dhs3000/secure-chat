@@ -13,17 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package de.dennishoersch.web.chat.db;
 
-package de.dennishoersch.web.chat;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Map;
 
-import java.io.IOException;
+import com.google.common.collect.Maps;
 
 /**
  * @author hoersch
  * 
  */
-public interface WebSocket {
-    public void setClientConnection(ClientConnection clientConnection);
+public class UserRepositoryImpl implements UserRepository {
 
-    public void sendMessage(String message) throws IOException;
+    private final Map<String, User> _users = Maps.uniqueIndex(users(), User.toName());
+
+    private static Collection<User> users() {
+        return Arrays.asList(new User("dennis", "pwd"), new User("megs", "pwd!"));
+    }
+
+    @Override
+    public User findUserByName(String name) {
+        return _users.get(name);
+    }
 }

@@ -23,22 +23,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import de.dennishoersch.web.chat.db.UserRepository;
-
 /**
  * @author hoersch
  * 
  */
 public class ChatRoom {
     private final Logger logger = Logger.getLogger(getClass());
-    private final UserRepository _userRepository = new UserRepository();
-
-    private final Encryption _encryption;
 
     private final Collection<ClientConnection> _clients = Collections.newSetFromMap(new ConcurrentHashMap<ClientConnection, Boolean>());
 
-    public ChatRoom(Encryption encryption) {
-        _encryption = encryption;
+    public ChatRoom() {
     }
 
     public final void broadcast(ClientConnection sourceClient, String message) {
@@ -63,11 +57,4 @@ public class ChatRoom {
         _clients.remove(handler);
     }
 
-    /**
-     * @param webSocket
-     * @return a new ClientConnection
-     */
-    public ClientConnection newClientConnection(WebSocket webSocket) {
-        return new ClientConnectionImpl(this, _userRepository, webSocket, _encryption);
-    }
 }
