@@ -60,7 +60,9 @@
 
         SUPER_OBJECT = function() {
         },
+
         localClassCounter = 0,
+
         extendInternal = function() {
             var parentClass,
                 typeName,
@@ -211,6 +213,11 @@
     SUPER_OBJECT.extend = D.extend;
 
     /**
+     * To be used to create new classes. Better named for this purpose then extend but the same functionality.
+     */
+    D.createClass = D.extend;
+
+    /**
      * In opposite to extend() this one does not declare the class in the global namespace.
      * It is not necessary to have an type name here. It makes the local class type names unique. Without type name the get an internal name.
      *
@@ -237,6 +244,34 @@
         return extendInternal.apply(this, args);
     };
     SUPER_OBJECT.extendLocal = D.extendLocal;
+
+    var toArguments = function(o) {
+        if (!o) {
+            return [];
+        }
+        if ($.isArray(o)) {
+            return o;
+        }
+        return [o];
+    };
+
+    /**
+     * Builds a function that executes the given functions one after each other calling with the result of the previous as Parameter.
+     */
+    D.chained = function(/*functions*/) {
+        var funcs = Array.prototype.slice.call(arguments, 0);
+        return function(/*initial arguments*/) {
+            var args = Array.prototype.slice.call(arguments, 0),
+                l = funcs.length,
+                i = 0,
+                result = args;
+
+            for (;i < l; i++) {
+                result = funcs[i].apply(null, toArguments(result));
+            }
+            return result;
+        };
+    };
 
     /**
      * Extracts the names of the parameter of the given function as String Array.
